@@ -6,7 +6,7 @@ import (
 	"github.com/go-chi/render"
 	"log"
 	"net/http"
-	"tidewatchBackend/stations"
+	"tidewatchBackend/routes"
 )
 
 func Routes() *chi.Mux {
@@ -19,7 +19,7 @@ func Routes() *chi.Mux {
 		middleware.Recoverer)
 
 	router.Route("/v1", func(r chi.Router) {
-		r.Mount("/api", stations.Routes())
+		r.Mount("/api", routes.Routes())
 	})
 
 	return router

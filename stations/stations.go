@@ -72,19 +72,8 @@ type Stations struct {
 
 // TODO: Need to update this to work with the DB so we are not always hitting NOAA for no reason if we already have this data saved in a DB
 
-// Generates the routes
-func Routes() *chi.Mux {
-	router := chi.NewRouter()
-
-	router.Get("/stations", getAllStations)
-	router.Get("/stations/{type}", getAllStationsByType)
-	router.Get("/station/{id}", getSingleStation)
-
-	return router
-}
-
 // GET: Retrieves all stations from NOAA
-func getAllStations(w http.ResponseWriter, r *http.Request) {
+func GetAllStations(w http.ResponseWriter, r *http.Request) {
 	stations := Stations{}
 
 	body, _ := networking.Get("https://tidesandcurrents.noaa.gov/mdapi/v1.0/webapi/stations.json")
@@ -94,7 +83,7 @@ func getAllStations(w http.ResponseWriter, r *http.Request) {
 }
 
 // GET: Retrieves all stations from NOAA, based on type
-func getAllStationsByType(w http.ResponseWriter, r *http.Request) {
+func GetAllStationsByType(w http.ResponseWriter, r *http.Request) {
 	t := chi.URLParam(r, "type")
 
 	stations := Stations{}
@@ -105,7 +94,7 @@ func getAllStationsByType(w http.ResponseWriter, r *http.Request) {
 }
 
 // GET: Retrieves a single station from NOAA
-func getSingleStation(w http.ResponseWriter, r *http.Request) {
+func GetSingleStation(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 
 	stations := Stations{}
