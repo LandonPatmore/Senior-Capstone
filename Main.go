@@ -6,7 +6,7 @@ import (
 	"github.com/go-chi/render"
 	"log"
 	"net/http"
-	"tidewatchBackend/routes"
+	"tidewatchAPI/routes"
 )
 
 func Routes() *chi.Mux {
